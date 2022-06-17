@@ -57,4 +57,5 @@
         child: YourWidget(),
       ),
 ```
+![animated_gradient](https://user-images.githubusercontent.com/48128175/174311300-d3d0fa14-9bf6-4345-a450-d91ef080a9a7.gif)
 

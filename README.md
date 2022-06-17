@@ -71,20 +71,19 @@ With this in place you can have some crazy effects.
 
 ## Available properties
 
-| Property          | Type                 | Description                                             |
-| ----------------- | -------------------- | ------------------------------------------------------- |
-| `primaryColors`   | List<Color>          | Starting colors of the animation.                       |
-| `secondaryColors` | List<Color>          | Ending colors of the animation.                         |
-| `primaryBegin`    | AlignmentGeometry?   | Starting alignment of primaryColrs.                     |
-| `primaryEnd`      | AlignmentGeometry?   | Ending alignment of primaryColrs.                       |
-| `secondaryEnd`    | AlignmentGeometry?   | Starting alignment of secondaryColors.                  |
-| `secondaryEnd`    | AlignmentGeometry?   | Ending alignment of secondaryColors.                    |
-| `duration`        | Duration?            | Duration between the transition.                        |
-| `controller`      | AnimationController? | You can pass your own animation controller and use that |
-|                   |                      | to control animation however you want.                  |
-| animateAlignments | bool?                | If you want to animate alignments.                      |
-| reverse           | bool?                | If you want to reverse the animation.                   |
-| child             | Widget?              | You can pass your own widget.                           |
+| Property            | Type                 | Description                                                                                                      |
+| ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `primaryColors`     | List                 | Starting colors of the animation.                                                                                |
+| `secondaryColors`   | List                 | Ending colors of the animation.                                                                                  |
+| `primaryBegin`      | AlignmentGeometry?   | Starting alignment of primaryColrs.                                                                              |
+| `primaryEnd`        | AlignmentGeometry?   | Ending alignment of primaryColrs.                                                                                |
+| `secondaryEnd`      | AlignmentGeometry?   | Starting alignment of secondaryColors.                                                                           |
+| `secondaryEnd`      | AlignmentGeometry?   | Ending alignment of secondaryColors.                                                                             |
+| `duration`          | Duration?            | Duration between the transition.                                                                                 |
+| `controller`        | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |
+| `animateAlignments` | bool?                | If you want to animate alignments.                                                                               |
+| `reverse`           | bool?                | If you want to reverse the animation.                                                                            |
+| `child`             | Widget?              | You can pass your own widget.                                                                                    |
 
 ## Author
 

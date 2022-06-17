@@ -1,6 +1,6 @@
 ## 0.0.2
 * 0.0.2 Fixed version tag
-*       Corrected formatter issue
+* Corrected formatter issue
 
 ## 0.0.1
 

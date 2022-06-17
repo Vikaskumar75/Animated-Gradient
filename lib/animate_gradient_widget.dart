@@ -1,9 +1,11 @@
 part of 'animate_gradient.dart';
+
 class AnimateGradient extends StatefulWidget {
   const AnimateGradient({
     Key? key,
     required this.primaryColors,
     required this.secondaryColors,
+    this.child,
     this.primaryBegin,
     this.primaryEnd,
     this.secondaryBegin,
@@ -52,6 +54,8 @@ class AnimateGradient extends StatefulWidget {
   /// [reverse]: set it to false if you don't want to reverse the animation.
   /// using that it will go into one direction only
   final bool reverse;
+
+  final Widget? child;
 
   @override
   State<AnimateGradient> createState() => _AnimateGradientState();
@@ -114,15 +118,7 @@ class _AnimateGradientState extends State<AnimateGradient>
               colors: evaluateColors(_animation),
             ),
           ),
-          child: const Center(
-            child: Text(
-              'Animated Gradient',
-              style: TextStyle(
-                fontSize: 36,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          child: widget.child,
         );
       },
     );

@@ -12,25 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Animated Gradient',
-      home: Home(title: 'Animated Gradient'),
+      home: App(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +38,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Colors.blueAccent,
           Colors.blue,
         ],
+        child: const Center(
+          child: Text(
+            'Animated Gradient',
+            style: TextStyle(
+              fontSize: 36,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

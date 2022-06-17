@@ -25,6 +25,7 @@
         child: YourWidget(),
       ),
 ```
+<img src="https://user-images.githubusercontent.com/48128175/174312925-0da71117-f4cd-4275-a83f-6e8993d5a02e.gif" alt="drawing" width="200"/>
 
 ### Play with alignments.
  Alignments are optional. You can pass any of the following alignments.

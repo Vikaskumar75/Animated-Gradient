@@ -28,6 +28,7 @@
 
 ### Play with alignments.
  Alignments are optional. You can pass any of the following alignments.
+ 
  `primaryBegin`
  `primaryEnd`
  `secondaryBegin`

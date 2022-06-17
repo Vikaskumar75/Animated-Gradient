@@ -18,9 +18,9 @@
           Colors.white,
         ],
         secondaryColors: const [
-          Colors.white,
-          Colors.blueAccent,
           Colors.blue,
+          Colors.blueAccent,
+          Colors.white,
         ],
         child: YourWidget(),
       ),
@@ -58,4 +58,9 @@
       ),
 ```
 <img src="https://user-images.githubusercontent.com/48128175/174311300-d3d0fa14-9bf6-4345-a450-d91ef080a9a7.gif" alt="drawing" width="200"/>
+
+## Author
+This plugin is developed by Vikas Kumar.
+- [Github](https://github.com/Vikaskumar75)
+- [LinkedIn](https://www.linkedin.com/in/vikas-kumar-6564a7185/)
 

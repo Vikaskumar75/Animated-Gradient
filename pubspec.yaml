@@ -1,7 +1,7 @@
 name: animate_gradient
-description: This widget includes an widget name AnimateGradient which will remove all the hassle to animate a gradient.
+description: This Package lets you make animated gradients without any hassle. Just pass the primary and secondary colors and you're done.
 version: 0.0.1
-homepage:
+homepage: https://github.com/Vikaskumar75/Animated-Container
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

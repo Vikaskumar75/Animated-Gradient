@@ -123,6 +123,12 @@ class _AnimateGradientState extends State<AnimateGradient>
       },
     );
   }
+  
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   List<ColorTween> getColorTweens() {
     if (widget.primaryColors.length != widget.secondaryColors.length) {

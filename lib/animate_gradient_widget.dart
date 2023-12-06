@@ -6,10 +6,10 @@ class AnimateGradient extends StatefulWidget {
     required this.primaryColors,
     required this.secondaryColors,
     this.child,
-    this.primaryBegin,
-    this.primaryEnd,
-    this.secondaryBegin,
-    this.secondaryEnd,
+    this.primaryBegin = AlignmentDirectional.topStart,
+    this.primaryEnd = AlignmentDirectional.topEnd,
+    this.secondaryBegin = AlignmentDirectional.bottomStart,
+    this.secondaryEnd = AlignmentDirectional.bottomEnd,
     this.controller,
     this.duration = const Duration(seconds: 4),
     this.animateAlignments = true,
@@ -28,24 +28,25 @@ class AnimateGradient extends StatefulWidget {
   /// [primaryColors]: These will be the starting colors of the [Animation].
   final List<Color> primaryColors;
 
-  /// [secondaryColors]: These Colors are those in which the [primaryColors] will transition into.
+  /// [secondaryColors]: These Colors are those in which the [primaryColors]
+  ///  will transition into.
   final List<Color> secondaryColors;
 
-  /// [primaryBegin]: This is begin [Alignment] for [primaryColors].
-  /// By default its value is [Alignment.topLeft]
-  final Alignment? primaryBegin;
+  /// [primaryBegin]: This is begin [AlignmentGeometry] for [primaryColors].
+  /// By default its value is [AlignmentDirectional.topStart]
+  final AlignmentGeometry primaryBegin;
 
-  /// [primaryBegin]: This is end [Alignment] for [primaryColors].
-  /// By default its value is [Alignment.topRight]
-  final Alignment? primaryEnd;
+  /// [primaryBegin]: This is end [AlignmentGeometry] for [primaryColors].
+  /// By default its value is [AlignmentDirectional.topEnd]
+  final AlignmentGeometry primaryEnd;
 
-  /// [secondaryBegin]: This is begin [Alignment] for [secondaryColors].
-  /// By default its value is [Alignment.bottomLeft]
-  final Alignment? secondaryBegin;
+  /// [secondaryBegin]: This is begin [AlignmentGeometry] for [secondaryColors].
+  /// By default its value is [AlignmentDirectional.bottomStart]
+  final AlignmentGeometry secondaryBegin;
 
-  /// [secondaryEnd]: This is end [Alignment] for [secondaryColors].
-  /// By default its value is [Alignment.bottomRight]
-  final Alignment? secondaryEnd;
+  /// [secondaryEnd]: This is end [AlignmentGeometry] for [secondaryColors].
+  /// By default its value is [AlignmentDirectional.bottomEnd]
+  final AlignmentGeometry secondaryEnd;
 
   /// [animateAlignments]: set to false if you don't want to animate the alignments.
   /// This can provide you way cooler animations
@@ -68,8 +69,8 @@ class _AnimateGradientState extends State<AnimateGradient>
 
   late List<ColorTween> _colorTween;
 
-  late AlignmentTween begin;
-  late AlignmentTween end;
+  late AlignmentGeometryTween begin;
+  late AlignmentGeometryTween end;
   List<Color> primaryColors = [];
   List<Color> secondaryColors = [];
 
@@ -79,13 +80,13 @@ class _AnimateGradientState extends State<AnimateGradient>
     secondaryColors = widget.secondaryColors;
 
     _colorTween = getColorTweens();
-    begin = AlignmentTween(
-      begin: widget.primaryBegin ?? Alignment.topLeft,
-      end: widget.primaryEnd ?? Alignment.topRight,
+    begin = AlignmentGeometryTween(
+      begin: widget.primaryBegin,
+      end: widget.primaryEnd,
     );
-    end = AlignmentTween(
-      begin: widget.secondaryBegin ?? Alignment.bottomLeft,
-      end: widget.secondaryEnd ?? Alignment.bottomRight,
+    end = AlignmentGeometryTween(
+      begin: widget.secondaryBegin,
+      end: widget.secondaryEnd,
     );
 
     _controller = widget.controller ??
@@ -110,11 +111,11 @@ class _AnimateGradientState extends State<AnimateGradient>
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: widget.animateAlignments
-                  ? begin.evaluate(_animation)
-                  : (widget.primaryBegin as Alignment),
+                  ? begin.evaluate(_animation)!
+                  : widget.primaryBegin,
               end: widget.animateAlignments
-                  ? end.evaluate(_animation)
-                  : widget.primaryEnd as Alignment,
+                  ? end.evaluate(_animation)!
+                  : widget.primaryEnd,
               colors: evaluateColors(_animation),
             ),
           ),
@@ -123,7 +124,7 @@ class _AnimateGradientState extends State<AnimateGradient>
       },
     );
   }
-  
+
   @override
   dispose() {
     _controller.dispose();

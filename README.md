@@ -77,7 +77,7 @@ With this in place you can have some crazy effects.
 | `secondaryColors`   | List                 | Ending colors of the animation.                                                                                  |
 | `primaryBegin`      | AlignmentGeometry    | Starting alignment of primaryColrs.                                                                              |
 | `primaryEnd`        | AlignmentGeometry    | Ending alignment of primaryColrs.                                                                                |
-| `secondaryEnd`      | AlignmentGeometry    | Starting alignment of secondaryColors.                                                                           |
+| `secondaryBegin`    | AlignmentGeometry    | Starting alignment of secondaryColors.                                                                           |
 | `secondaryEnd`      | AlignmentGeometry    | Ending alignment of secondaryColors.                                                                             |
 | `duration`          | Duration?            | Duration between the transition.                                                                                 |
 | `controller`        | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |

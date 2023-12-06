@@ -14,7 +14,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   animate_gradient:
-    path: ../../animate_gradient
+    path: ../
 
 dev_dependencies:
   flutter_test:

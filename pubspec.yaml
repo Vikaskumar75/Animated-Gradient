@@ -1,6 +1,6 @@
 name: animate_gradient
 description: This Package lets you make animated gradients without any hassle. Just pass the primary and secondary colors and you're done.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/Vikaskumar75/Animated-Container
 
 environment:

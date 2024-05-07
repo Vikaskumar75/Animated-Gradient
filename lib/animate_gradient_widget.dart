@@ -10,6 +10,11 @@ class AnimateGradient extends StatefulWidget {
     this.primaryEnd = Alignment.topRight,
     this.secondaryBegin = Alignment.bottomLeft,
     this.secondaryEnd = Alignment.bottomRight,
+    this.primaryBeginGeometry,
+    this.primaryEndGeometry,
+    this.secondaryBeginGeometry,
+    this.secondaryEndGeometry,
+    this.textDirectionForGeometry = TextDirection.ltr,
     this.controller,
     this.duration = const Duration(seconds: 4),
     this.animateAlignments = true,
@@ -46,6 +51,30 @@ class AnimateGradient extends StatefulWidget {
   /// [secondaryEnd]: This is end [Alignment] for [secondaryColors].
   /// By default its value is [Alignment.bottomRight]
   final Alignment secondaryEnd;
+
+  /// Alternatively you can use [primaryBeginGeometry] over [primaryBegin] for better control over alignments
+  /// These are really useful for when you are builing an [rtl] app.
+  /// [primaryBeginGeometry] will have higher priority than [primaryBegin]
+  final AlignmentGeometry? primaryBeginGeometry;
+
+  /// Alternatively you can use [primaryEndGeometry] over [primaryEnd] for better control over alignments
+  /// These are really useful for when you are builing an [rtl] app.
+  /// [primaryEndGeometry] will have higher priority than [primaryEnd]
+  final AlignmentGeometry? primaryEndGeometry;
+
+  /// Alternatively you can use [secondaryBeginGeometry] over [secondaryBegin] for better control over alignments
+  /// These are really useful for when you are builing an [rtl] app.
+  /// [secondaryBeginGeometry] will have higher priority than [secondaryBegin]
+  final AlignmentGeometry? secondaryBeginGeometry;
+
+  /// Alternatively you can use [secondaryEndGeometry] over [secondaryEnd] for better control over alignments
+  /// These are really useful for when you are builing an [rtl] app.
+  /// [secondaryEndGeometry] will have higher priority than [secondaryEnd]
+  final AlignmentGeometry? secondaryEndGeometry;
+
+  /// This is the [TextDirection] which is gonna be used to resolve [AlignmentGeometry] passed through
+  /// [primaryBeginGeometry], [primaryEndGeometry], [secondaryBeginGeometry], [secondaryEndGeometry]
+  final TextDirection textDirectionForGeometry;
 
   /// [animateAlignments]: set to false if you don't want to animate the alignments.
   /// This can provide you way cooler animations
@@ -144,13 +173,26 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   void _setAlignmentTweens() {
+    final primaryBeginGeometry = widget.primaryBeginGeometry?.resolve(
+      widget.textDirectionForGeometry,
+    );
+    final primaryEndGeometry = widget.primaryEndGeometry?.resolve(
+      widget.textDirectionForGeometry,
+    );
+    final secondaryBeginGeometry = widget.secondaryBeginGeometry?.resolve(
+      widget.textDirectionForGeometry,
+    );
+    final secondaryEndGeometry = widget.secondaryEndGeometry?.resolve(
+      widget.textDirectionForGeometry,
+    );
+
     begin = AlignmentTween(
-      begin: widget.primaryBegin,
-      end: widget.primaryEnd,
+      begin: primaryBeginGeometry ?? widget.primaryBegin,
+      end: primaryEndGeometry ?? widget.primaryEnd,
     );
     end = AlignmentTween(
-      begin: widget.secondaryBegin,
-      end: widget.secondaryEnd,
+      begin: secondaryBeginGeometry ?? widget.secondaryBegin,
+      end: secondaryEndGeometry ?? widget.secondaryEnd,
     );
   }
 

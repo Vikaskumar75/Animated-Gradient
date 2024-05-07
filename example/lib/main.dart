@@ -27,24 +27,25 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   bool isChanged = false;
   List<Color> primaryColors = const [
-    Colors.pink,
-    Colors.pinkAccent,
     Colors.white,
+    Colors.pinkAccent,
+    Colors.pink,
   ];
   List<Color> secondaryColors = const [
-    Colors.white,
-    Colors.blueAccent,
     Colors.blue,
+    Colors.blueAccent,
+    Colors.white,
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimateGradient(
-        primaryBegin: Alignment.topLeft,
-        primaryEnd: Alignment.bottomLeft,
-        secondaryBegin: Alignment.bottomLeft,
-        secondaryEnd: Alignment.topRight,
+        primaryBeginGeometry: const AlignmentDirectional(0, 1),
+        primaryEndGeometry: const AlignmentDirectional(0, 2),
+        secondaryBeginGeometry: const AlignmentDirectional(2, 0),
+        secondaryEndGeometry: const AlignmentDirectional(0, -0.8),
+        textDirectionForGeometry: TextDirection.rtl,
         primaryColors: primaryColors,
         secondaryColors: secondaryColors,
         child: Center(

@@ -150,10 +150,10 @@ class _AnimateGradientState extends State<AnimateGradient>
       throw Exception('primaryColors.length != secondaryColors.length');
     }
 
-    final List<ColorTween> _colorTweens = [];
+    final List<ColorTween> colorTweens = [];
 
     for (int i = 0; i < primaryColors.length; i++) {
-      _colorTweens.add(
+      colorTweens.add(
         ColorTween(
           begin: primaryColors[i],
           end: secondaryColors[i],
@@ -161,15 +161,15 @@ class _AnimateGradientState extends State<AnimateGradient>
       );
     }
 
-    return _colorTweens;
+    return colorTweens;
   }
 
   List<Color> _evaluateColors(Animation<double> animation) {
-    final List<Color> _colors = [];
+    final List<Color> colors = [];
     for (int i = 0; i < _colorTween.length; i++) {
-      _colors.add(_colorTween[i].evaluate(animation)!);
+      colors.add(_colorTween[i].evaluate(animation)!);
     }
-    return _colors;
+    return colors;
   }
 
   void _setAlignmentTweens() {

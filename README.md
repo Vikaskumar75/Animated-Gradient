@@ -43,7 +43,7 @@ Alignments are optional. You can pass any of the following alignments.
 `secondaryBegin`
 `secondaryEnd`
 
-With this in place you can have some crazy effects.
+With this in place, you can have some crazy effects.
 
 ```dart
    import 'package:animate_gradient/animate_gradient.dart';
@@ -75,11 +75,14 @@ With the apps built in rtl format normal `Alignments` cannot always work.
 So, you can use `AlignemntGeometry` instead.
 
 `primaryBegin` --> `primaryBeginGeometry`
+
 `primaryEnd` --> `primaryEndGeometry`
+
 `secondaryBegin` --> `secondaryBeginGeometry`
+
 `secondaryEnd` --> `secondaryEndGeometry`
 
-With this you also have an additional property `textDirectionForGeometry`.
+With this, you also have an additional property `textDirectionForGeometry`.
 This will be used to resolve the AlignmentGeometry
 
 ```dart
@@ -105,9 +108,9 @@ This will be used to resolve the AlignmentGeometry
      ),
 ```
 
-<img src="https://user-images.githubusercontent.com/48128175/174311300-d3d0fa14-9bf6-4345-a450-d91ef080a9a7.gif" alt="drawing" width="200"/>
+<img src="https://github.com/Vikaskumar75/Animated-Gradient/assets/48128175/726471f7-68df-4c90-9bf7-177aff788d28" alt="drawing" width="200"/>
 
-== Please note that `AlignmentGeometry` will be given more priority over `Alignment` ==
+**Please note that `AlignmentGeometry` will be given more priority over `Alignment`**
 
 ## Available properties
 
@@ -128,7 +131,7 @@ This will be used to resolve the AlignmentGeometry
 | `controller`              | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |
 | `animateAlignments`       | bool?                | If you want to animate alignments.                                                                               |
 | `reverse`                 | bool?                | If you want to reverse the animation.                                                                            |
-| `child`                   | Widget?              | You can pass your own widget.                                                                                    |
+| `child`                   | Widget?              | You can pass your widget.                                                                                        |
 
 ## Author
 

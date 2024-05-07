@@ -17,8 +17,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  bool isChanged = false;
+  List<Color> primaryColors = const [
+    Colors.pink,
+    Colors.pinkAccent,
+    Colors.white,
+  ];
+  List<Color> secondaryColors = const [
+    Colors.white,
+    Colors.blueAccent,
+    Colors.blue,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +45,71 @@ class App extends StatelessWidget {
         primaryEnd: Alignment.bottomLeft,
         secondaryBegin: Alignment.bottomLeft,
         secondaryEnd: Alignment.topRight,
-        primaryColors: const [
-          Colors.pink,
-          Colors.pinkAccent,
-          Colors.white,
-        ],
-        secondaryColors: const [
-          Colors.white,
-          Colors.blueAccent,
-          Colors.blue,
-        ],
-        child: const Center(
-          child: Text(
-            'Animated Gradient',
-            style: TextStyle(
-              fontSize: 36,
-              color: Colors.white,
-            ),
+        primaryColors: primaryColors,
+        secondaryColors: secondaryColors,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Animated Gradient',
+                style: TextStyle(
+                  fontSize: 36,
+                  color: Colors.white,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: _changeColors,
+                style: _buttonStyle(),
+                child: const Text(
+                  'Change Colors',
+                  style: TextStyle(color: Colors.black),
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
+  }
+
+  ButtonStyle _buttonStyle() {
+    return ButtonStyle(
+      shape: MaterialStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
+  }
+
+  void _changeColors() {
+    if (isChanged) {
+      isChanged = false;
+      primaryColors = const [
+        Colors.pink,
+        Colors.pinkAccent,
+        Colors.white,
+      ];
+      secondaryColors = const [
+        Colors.white,
+        Colors.blueAccent,
+        Colors.blue,
+      ];
+    } else {
+      isChanged = true;
+      primaryColors = [
+        Colors.red,
+        Colors.redAccent,
+        Colors.white,
+      ];
+      secondaryColors = [
+        Colors.white,
+        Colors.tealAccent,
+        Colors.teal,
+      ];
+    }
+
+    setState(() {});
   }
 }

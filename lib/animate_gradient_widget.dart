@@ -6,10 +6,10 @@ class AnimateGradient extends StatefulWidget {
     required this.primaryColors,
     required this.secondaryColors,
     this.child,
-    this.primaryBegin,
-    this.primaryEnd,
-    this.secondaryBegin,
-    this.secondaryEnd,
+    this.primaryBegin = Alignment.topLeft,
+    this.primaryEnd = Alignment.topRight,
+    this.secondaryBegin = Alignment.bottomLeft,
+    this.secondaryEnd = Alignment.bottomRight,
     this.controller,
     this.duration = const Duration(seconds: 4),
     this.animateAlignments = true,
@@ -33,19 +33,19 @@ class AnimateGradient extends StatefulWidget {
 
   /// [primaryBegin]: This is begin [Alignment] for [primaryColors].
   /// By default its value is [Alignment.topLeft]
-  final Alignment? primaryBegin;
+  final Alignment primaryBegin;
 
   /// [primaryBegin]: This is end [Alignment] for [primaryColors].
   /// By default its value is [Alignment.topRight]
-  final Alignment? primaryEnd;
+  final Alignment primaryEnd;
 
   /// [secondaryBegin]: This is begin [Alignment] for [secondaryColors].
   /// By default its value is [Alignment.bottomLeft]
-  final Alignment? secondaryBegin;
+  final Alignment secondaryBegin;
 
   /// [secondaryEnd]: This is end [Alignment] for [secondaryColors].
   /// By default its value is [Alignment.bottomRight]
-  final Alignment? secondaryEnd;
+  final Alignment secondaryEnd;
 
   /// [animateAlignments]: set to false if you don't want to animate the alignments.
   /// This can provide you way cooler animations
@@ -75,30 +75,22 @@ class _AnimateGradientState extends State<AnimateGradient>
 
   @override
   void initState() {
+    _initialize();
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(_) {
+    _initialize();
+    super.didUpdateWidget(_);
+  }
+
+  void _initialize() {
     primaryColors = widget.primaryColors;
     secondaryColors = widget.secondaryColors;
-
-    _colorTween = getColorTweens();
-    begin = AlignmentTween(
-      begin: widget.primaryBegin ?? Alignment.topLeft,
-      end: widget.primaryEnd ?? Alignment.topRight,
-    );
-    end = AlignmentTween(
-      begin: widget.secondaryBegin ?? Alignment.bottomLeft,
-      end: widget.secondaryEnd ?? Alignment.bottomRight,
-    );
-
-    _controller = widget.controller ??
-        (AnimationController(
-          vsync: this,
-          duration: widget.duration,
-        )..repeat(reverse: widget.reverse));
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
-
-    super.initState();
+    _colorTween = _getColorTweens();
+    if (widget.animateAlignments) _setAlignmentTweens();
+    _setAnimations();
   }
 
   @override
@@ -111,11 +103,11 @@ class _AnimateGradientState extends State<AnimateGradient>
             gradient: LinearGradient(
               begin: widget.animateAlignments
                   ? begin.evaluate(_animation)
-                  : (widget.primaryBegin as Alignment),
+                  : widget.primaryBegin,
               end: widget.animateAlignments
                   ? end.evaluate(_animation)
-                  : widget.primaryEnd as Alignment,
-              colors: evaluateColors(_animation),
+                  : widget.primaryEnd,
+              colors: _evaluateColors(_animation),
             ),
           ),
           child: widget.child,
@@ -123,14 +115,8 @@ class _AnimateGradientState extends State<AnimateGradient>
       },
     );
   }
-  
-  @override
-  dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
-  List<ColorTween> getColorTweens() {
+  List<ColorTween> _getColorTweens() {
     if (widget.primaryColors.length != widget.secondaryColors.length) {
       throw Exception('primaryColors.length != secondaryColors.length');
     }
@@ -149,11 +135,41 @@ class _AnimateGradientState extends State<AnimateGradient>
     return _colorTweens;
   }
 
-  List<Color> evaluateColors(Animation<double> animation) {
+  List<Color> _evaluateColors(Animation<double> animation) {
     final List<Color> _colors = [];
     for (int i = 0; i < _colorTween.length; i++) {
       _colors.add(_colorTween[i].evaluate(animation)!);
     }
     return _colors;
+  }
+
+  void _setAlignmentTweens() {
+    begin = AlignmentTween(
+      begin: widget.primaryBegin,
+      end: widget.primaryEnd,
+    );
+    end = AlignmentTween(
+      begin: widget.secondaryBegin,
+      end: widget.secondaryEnd,
+    );
+  }
+
+  void _setAnimations() {
+    _controller = widget.controller ??
+        AnimationController(
+          vsync: this,
+          duration: widget.duration,
+        )
+      ..repeat(reverse: widget.reverse);
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

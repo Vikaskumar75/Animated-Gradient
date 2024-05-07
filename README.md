@@ -75,10 +75,10 @@ With this in place you can have some crazy effects.
 | ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `primaryColors`     | List                 | Starting colors of the animation.                                                                                |
 | `secondaryColors`   | List                 | Ending colors of the animation.                                                                                  |
-| `primaryBegin`      | AlignmentGeometry?   | Starting alignment of primaryColrs.                                                                              |
-| `primaryEnd`        | AlignmentGeometry?   | Ending alignment of primaryColrs.                                                                                |
-| `secondaryEnd`      | AlignmentGeometry?   | Starting alignment of secondaryColors.                                                                           |
-| `secondaryEnd`      | AlignmentGeometry?   | Ending alignment of secondaryColors.                                                                             |
+| `primaryBegin`      | Alignment?           | Starting alignment of primaryColrs.                                                                              |
+| `primaryEnd`        | Alignment?           | Ending alignment of primaryColrs.                                                                                |
+| `secondaryEnd`      | Alignment?           | Starting alignment of secondaryColors.                                                                           |
+| `secondaryEnd`      | Alignment?           | Ending alignment of secondaryColors.                                                                             |
 | `duration`          | Duration?            | Duration between the transition.                                                                                 |
 | `controller`        | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |
 | `animateAlignments` | bool?                | If you want to animate alignments.                                                                               |

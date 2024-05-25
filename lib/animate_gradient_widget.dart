@@ -198,13 +198,20 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   void _setAnimations() {
+    final controller = widget.controller;
+    if (controller != null) {
+      _controller = controller..repeat(reverse: widget.reverse);
+      _animation = CurvedAnimation(
+        parent: _controller!,
+        curve: Curves.easeInOut,
+      );
+      return;
+    }
     _controller?.dispose();
-    _controller = widget.controller ??
-        AnimationController(
-          vsync: this,
-          duration: widget.duration,
-        )
-      ..repeat(reverse: widget.reverse);
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    )..repeat(reverse: widget.reverse);
     _animation = CurvedAnimation(
       parent: _controller!,
       curve: Curves.easeInOut,
@@ -213,7 +220,10 @@ class _AnimateGradientState extends State<AnimateGradient>
 
   @override
   void dispose() {
-    _controller?.dispose();
+    final controller = widget.controller;
+    if (controller == null) {
+      _controller?.dispose();
+    }
     super.dispose();
   }
 }

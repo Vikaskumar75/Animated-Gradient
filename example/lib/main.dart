@@ -17,14 +17,49 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  State<App> createState() => _AppState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Animated Gradient'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AnimateGradientScreen()),
+            );
+          },
+          style: ButtonStyle(
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+          child: const Text(
+            'Go to Animated Gradient',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _AppState extends State<App> {
+class AnimateGradientScreen extends StatefulWidget {
+  const AnimateGradientScreen({super.key});
+
+  @override
+  State<AnimateGradientScreen> createState() => _AnimateGradientScreenState();
+}
+
+class _AnimateGradientScreenState extends State<AnimateGradientScreen> {
   bool isChanged = false;
   List<Color> primaryColors = const [
     Colors.white,
@@ -38,8 +73,16 @@ class _AppState extends State<App> {
   ];
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Animated Gradient'),
+      ),
       body: AnimateGradient(
         primaryBeginGeometry: const AlignmentDirectional(0, 1),
         primaryEndGeometry: const AlignmentDirectional(0, 2),
@@ -76,7 +119,7 @@ class _AppState extends State<App> {
 
   ButtonStyle _buttonStyle() {
     return ButtonStyle(
-      shape: MaterialStatePropertyAll(
+      shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

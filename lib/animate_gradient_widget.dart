@@ -2,7 +2,7 @@ part of 'animate_gradient.dart';
 
 class AnimateGradient extends StatefulWidget {
   const AnimateGradient({
-    Key? key,
+    super.key,
     required this.primaryColors,
     required this.secondaryColors,
     this.child,
@@ -20,8 +20,7 @@ class AnimateGradient extends StatefulWidget {
     this.animateAlignments = true,
     this.reverse = true,
   })  : assert(primaryColors.length >= 2),
-        assert(primaryColors.length == secondaryColors.length),
-        super(key: key);
+        assert(primaryColors.length == secondaryColors.length);
 
   /// [controller]: pass this to have a fine control over the [Animation]
   final AnimationController? controller;
@@ -92,8 +91,8 @@ class AnimateGradient extends StatefulWidget {
 
 class _AnimateGradientState extends State<AnimateGradient>
     with TickerProviderStateMixin {
-  late Animation<double> _animation;
-  late AnimationController _controller;
+  AnimationController? _controller;
+  Animation<double>? _animation;
 
   late List<ColorTween> _colorTween;
 
@@ -124,19 +123,21 @@ class _AnimateGradientState extends State<AnimateGradient>
 
   @override
   Widget build(BuildContext context) {
+    final animation = _animation;
+    if (animation == null) return Container();
     return AnimatedBuilder(
-      animation: _animation,
+      animation: animation,
       builder: (BuildContext context, Widget? child) {
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: widget.animateAlignments
-                  ? begin.evaluate(_animation)
+                  ? begin.evaluate(animation)
                   : widget.primaryBegin,
               end: widget.animateAlignments
-                  ? end.evaluate(_animation)
+                  ? end.evaluate(animation)
                   : widget.primaryEnd,
-              colors: _evaluateColors(_animation),
+              colors: _evaluateColors(animation),
             ),
           ),
           child: widget.child,
@@ -197,6 +198,7 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   void _setAnimations() {
+    _controller?.dispose();
     _controller = widget.controller ??
         AnimationController(
           vsync: this,
@@ -204,14 +206,14 @@ class _AnimateGradientState extends State<AnimateGradient>
         )
       ..repeat(reverse: widget.reverse);
     _animation = CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Curves.easeInOut,
     );
   }
 
   @override
-  dispose() {
-    _controller.dispose();
+  void dispose() {
+    _controller?.dispose();
     super.dispose();
   }
 }

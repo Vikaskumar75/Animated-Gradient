@@ -1,11 +1,11 @@
 name: animate_gradient
 description: This Package lets you make animated gradients without any hassle. Just pass the primary and secondary colors and you're done.
-version: 0.0.3
-homepage: https://github.com/Vikaskumar75/Animated-Container
+version: 0.0.4
+homepage: https://github.com/Vikaskumar75/Animated-Gradient
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.13.0"
 
 dependencies:
   flutter:
@@ -14,6 +14,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.2
+  flutter_lints: ^6.0.0
 
 flutter:

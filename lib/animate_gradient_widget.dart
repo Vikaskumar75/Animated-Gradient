@@ -2,7 +2,7 @@ part of 'animate_gradient.dart';
 
 class AnimateGradient extends StatefulWidget {
   const AnimateGradient({
-    Key? key,
+    super.key,
     required this.primaryColors,
     required this.secondaryColors,
     this.child,
@@ -22,8 +22,7 @@ class AnimateGradient extends StatefulWidget {
     this.repeat = true,
     this.curve = Curves.easeInOut,
   })  : assert(primaryColors.length >= 2),
-        assert(primaryColors.length == secondaryColors.length),
-        super(key: key);
+        assert(primaryColors.length == secondaryColors.length);
 
   /// [controller]: pass this to have a fine control over the [Animation]
   final AnimationController? controller;
@@ -99,8 +98,7 @@ class AnimateGradient extends StatefulWidget {
   State<AnimateGradient> createState() => _AnimateGradientState();
 }
 
-class _AnimateGradientState extends State<AnimateGradient>
-    with TickerProviderStateMixin {
+class _AnimateGradientState extends State<AnimateGradient> with TickerProviderStateMixin {
   Animation<double>? _animation;
   AnimationController? _controller;
 
@@ -115,9 +113,9 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   @override
-  void didUpdateWidget(_) {
+  void didUpdateWidget(AnimateGradient oldWidget) {
     _initialize();
-    super.didUpdateWidget(_);
+    super.didUpdateWidget(oldWidget);
   }
 
   void _initialize() {
@@ -134,12 +132,8 @@ class _AnimateGradientState extends State<AnimateGradient>
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: widget.animateAlignments
-                  ? begin.evaluate(_animation!)
-                  : widget.primaryBegin,
-              end: widget.animateAlignments
-                  ? end.evaluate(_animation!)
-                  : widget.primaryEnd,
+              begin: widget.animateAlignments ? begin.evaluate(_animation!) : widget.primaryBegin,
+              end: widget.animateAlignments ? end.evaluate(_animation!) : widget.primaryEnd,
               colors: _evaluateColors(_animation!),
             ),
           ),

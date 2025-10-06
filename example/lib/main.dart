@@ -49,6 +49,7 @@ class _AppState extends State<App> {
         textDirectionForGeometry: TextDirection.rtl,
         primaryColors: primaryColors,
         secondaryColors: secondaryColors,
+        curve: Curves.easeInOutCubic,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

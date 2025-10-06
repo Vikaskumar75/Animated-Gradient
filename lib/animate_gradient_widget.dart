@@ -19,12 +19,18 @@ class AnimateGradient extends StatefulWidget {
     this.duration = const Duration(seconds: 4),
     this.animateAlignments = true,
     this.reverse = true,
+    this.repeat = true,
+    this.curve = Curves.easeInOut,
   })  : assert(primaryColors.length >= 2),
         assert(primaryColors.length == secondaryColors.length),
         super(key: key);
 
   /// [controller]: pass this to have a fine control over the [Animation]
   final AnimationController? controller;
+
+  /// [curve]: The curve to use for the animation.
+  /// By default its value is [Curves.easeInOut]
+  final Curve curve;
 
   /// [duration]: Time to switch between [Gradient].
   /// By default its value is [Duration(seconds:4)]
@@ -84,13 +90,17 @@ class AnimateGradient extends StatefulWidget {
   /// using that it will go into one direction only
   final bool reverse;
 
+  /// [repeat]: set it to false if you don't want to repeat the animation.
+  final bool repeat;
+
   final Widget? child;
 
   @override
   State<AnimateGradient> createState() => _AnimateGradientState();
 }
 
-class _AnimateGradientState extends State<AnimateGradient> with TickerProviderStateMixin {
+class _AnimateGradientState extends State<AnimateGradient>
+    with TickerProviderStateMixin {
   Animation<double>? _animation;
   AnimationController? _controller;
 
@@ -124,8 +134,12 @@ class _AnimateGradientState extends State<AnimateGradient> with TickerProviderSt
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: widget.animateAlignments ? begin.evaluate(_animation!) : widget.primaryBegin,
-              end: widget.animateAlignments ? end.evaluate(_animation!) : widget.primaryEnd,
+              begin: widget.animateAlignments
+                  ? begin.evaluate(_animation!)
+                  : widget.primaryBegin,
+              end: widget.animateAlignments
+                  ? end.evaluate(_animation!)
+                  : widget.primaryEnd,
               colors: _evaluateColors(_animation!),
             ),
           ),
@@ -197,12 +211,18 @@ class _AnimateGradientState extends State<AnimateGradient> with TickerProviderSt
       _controller = AnimationController(
         vsync: this,
         duration: widget.duration,
-      )..repeat(reverse: widget.reverse);
+      );
+
+      if (widget.repeat) {
+        _controller!.repeat(reverse: widget.reverse);
+      } else {
+        _controller!.forward(from: 0);
+      }
     }
 
     _animation = CurvedAnimation(
       parent: _controller!,
-      curve: Curves.easeInOut,
+      curve: widget.curve,
     );
   }
 

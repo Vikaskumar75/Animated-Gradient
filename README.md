@@ -114,24 +114,26 @@ This will be used to resolve the AlignmentGeometry
 
 ## Available properties
 
-| Property                  | Type                 | Description                                                                                                      |
-| ------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `primaryColors`           | List                 | Starting colors of the animation.                                                                                |
-| `secondaryColors`         | List                 | Ending colors of the animation.                                                                                  |
-| `primaryBegin`            | Alignment?           | Starting Alignment of primaryColors.                                                                             |
-| `primaryEnd`              | Alignment?           | Ending Alignment of primaryColors.                                                                               |
-| `secondaryEnd`            | Alignment?           | Starting Alignment of secondaryColors.                                                                           |
-| `secondaryEnd`            | Alignment?           | Ending Alignment of secondaryColors.                                                                             |
-| `primaryBeginGeometry`    | AlignmentGeometry?   | Starting AlignmentGeometry of primaryColrs.                                                                      |
-| `primaryEndGeometry`      | AlignmentGeometry?   | Ending AlignmentGeometry of primaryColrs.                                                                        |
-| `secondaryEndGeometry`    | AlignmentGeometry?   | Starting AlignmentGeometry of secondaryColors.                                                                   |
-| `secondaryEndGeometry`    | AlignmentGeometry?   | Ending AlignmentGeometry of secondaryColors.                                                                     |
-| `textDirectionForGeometry`| TextDierction?       | TextDirection that will be used to resolve AlignmentGeometry                                                     |
-| `duration`                | Duration?            | Duration between the transition.                                                                                 |
-| `controller`              | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |
-| `animateAlignments`       | bool?                | If you want to animate alignments.                                                                               |
-| `reverse`                 | bool?                | If you want to reverse the animation.                                                                            |
-| `child`                   | Widget?              | You can pass your widget.                                                                                        |
+| Property                   | Type                 | Description                                                                                                      |
+| -------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `primaryColors`            | List                 | Starting colors of the animation.                                                                                |
+| `secondaryColors`          | List                 | Ending colors of the animation.                                                                                  |
+| `primaryBegin`             | Alignment?           | Starting Alignment of primaryColors.                                                                             |
+| `primaryEnd`               | Alignment?           | Ending Alignment of primaryColors.                                                                               |
+| `secondaryBegin`           | Alignment?           | Starting Alignment of secondaryColors.                                                                           |
+| `secondaryEnd`             | Alignment?           | Ending Alignment of secondaryColors.                                                                             |
+| `primaryBeginGeometry`     | AlignmentGeometry?   | Starting AlignmentGeometry of primaryColors.                                                                     |
+| `primaryEndGeometry`       | AlignmentGeometry?   | Ending AlignmentGeometry of primaryColors.                                                                       |
+| `secondaryBeginGeometry`   | AlignmentGeometry?   | Starting AlignmentGeometry of secondaryColors.                                                                   |
+| `secondaryEndGeometry`     | AlignmentGeometry?   | Ending AlignmentGeometry of secondaryColors.                                                                     |
+| `textDirectionForGeometry` | TextDirection?       | TextDirection that will be used to resolve AlignmentGeometry                                                     |
+| `duration`                 | Duration?            | Duration between the transition.                                                                                 |
+| `controller`               | AnimationController? | <br> You can pass your own animation controller and use that</br><br>to control animation however you want.</br> |
+| `animateAlignments`        | bool?                | If you want to animate alignments.                                                                               |
+| `reverse`                  | bool?                | If you want to reverse the animation.                                                                            |
+| `repeat`                   | bool?                | If you want to repeat the animation.                                                                             |
+| `curve`                    | Curve?               | The curve to use for the animation.                                                                              |
+| `child`                    | Widget?              | You can pass your widget.                                                                                        |
 
 ## Author
 

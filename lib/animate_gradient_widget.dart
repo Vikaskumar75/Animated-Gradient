@@ -90,17 +90,13 @@ class AnimateGradient extends StatefulWidget {
   State<AnimateGradient> createState() => _AnimateGradientState();
 }
 
-class _AnimateGradientState extends State<AnimateGradient>
-    with TickerProviderStateMixin {
-  late Animation<double> _animation;
-  late AnimationController _controller;
+class _AnimateGradientState extends State<AnimateGradient> with TickerProviderStateMixin {
+  Animation<double>? _animation;
+  AnimationController? _controller;
 
   late List<ColorTween> _colorTween;
-
   late AlignmentTween begin;
   late AlignmentTween end;
-  List<Color> primaryColors = [];
-  List<Color> secondaryColors = [];
 
   @override
   void initState() {
@@ -115,8 +111,6 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   void _initialize() {
-    primaryColors = widget.primaryColors;
-    secondaryColors = widget.secondaryColors;
     _colorTween = _getColorTweens();
     if (widget.animateAlignments) _setAlignmentTweens();
     _setAnimations();
@@ -125,18 +119,14 @@ class _AnimateGradientState extends State<AnimateGradient>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animation,
+      animation: _animation!,
       builder: (BuildContext context, Widget? child) {
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: widget.animateAlignments
-                  ? begin.evaluate(_animation)
-                  : widget.primaryBegin,
-              end: widget.animateAlignments
-                  ? end.evaluate(_animation)
-                  : widget.primaryEnd,
-              colors: _evaluateColors(_animation),
+              begin: widget.animateAlignments ? begin.evaluate(_animation!) : widget.primaryBegin,
+              end: widget.animateAlignments ? end.evaluate(_animation!) : widget.primaryEnd,
+              colors: _evaluateColors(_animation!),
             ),
           ),
           child: widget.child,
@@ -152,11 +142,11 @@ class _AnimateGradientState extends State<AnimateGradient>
 
     final List<ColorTween> colorTweens = [];
 
-    for (int i = 0; i < primaryColors.length; i++) {
+    for (int i = 0; i < widget.primaryColors.length; i++) {
       colorTweens.add(
         ColorTween(
-          begin: primaryColors[i],
-          end: secondaryColors[i],
+          begin: widget.primaryColors[i],
+          end: widget.secondaryColors[i],
         ),
       );
     }
@@ -197,21 +187,28 @@ class _AnimateGradientState extends State<AnimateGradient>
   }
 
   void _setAnimations() {
-    _controller = widget.controller ??
-        AnimationController(
-          vsync: this,
-          duration: widget.duration,
-        )
-      ..repeat(reverse: widget.reverse);
+    /// Since we call [_initialize] on every state change, we need to dispose the old controller.
+    /// Otherwise, it will cause a memory leak. Since every state change will create a new controller.
+    if (_controller != null) _controller!.dispose();
+
+    if (widget.controller != null) {
+      _controller = widget.controller;
+    } else {
+      _controller = AnimationController(
+        vsync: this,
+        duration: widget.duration,
+      )..repeat(reverse: widget.reverse);
+    }
+
     _animation = CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Curves.easeInOut,
     );
   }
 
   @override
   dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 }

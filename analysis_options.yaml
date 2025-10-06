@@ -2,3 +2,28 @@ include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
+
+formatter:
+  page_width: 120
+
+linter:
+  rules:
+    # Essential error prevention
+    - avoid_print
+    - use_build_context_synchronously
+    - cancel_subscriptions
+
+    # Code quality
+    - prefer_const_constructors
+    - prefer_final_fields
+    - require_trailing_commas
+
+    # Style
+    - prefer_single_quotes
+    - sort_constructors_first

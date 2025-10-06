@@ -41,10 +41,11 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimateGradient(
-        primaryBeginGeometry: const AlignmentDirectional(0, 1),
-        primaryEndGeometry: const AlignmentDirectional(0, 2),
-        secondaryBeginGeometry: const AlignmentDirectional(2, 0),
-        secondaryEndGeometry: const AlignmentDirectional(0, -0.8),
+        duration: const Duration(seconds: 3),
+        primaryBeginGeometry: const AlignmentDirectional(0, -1),
+        primaryEndGeometry: const AlignmentDirectional(0, 3),
+        secondaryBeginGeometry: const AlignmentDirectional(3, 0),
+        secondaryEndGeometry: const AlignmentDirectional(0, -1),
         textDirectionForGeometry: TextDirection.rtl,
         primaryColors: primaryColors,
         secondaryColors: secondaryColors,
@@ -76,7 +77,7 @@ class _AppState extends State<App> {
 
   ButtonStyle _buttonStyle() {
     return ButtonStyle(
-      shape: MaterialStatePropertyAll(
+      shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
